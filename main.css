@@ -1,0 +1,12 @@
+body {
+    font-family: Arial;
+    font-size: 18px;
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 960px;
+}
+
+.firstrow {
+    font-weight: bold;
+    font-size: 22px;
+}
