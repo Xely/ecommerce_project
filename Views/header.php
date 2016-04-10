@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="main.css">
 </head>
 
-<div class="col-xs-12">Header</div>
+<div class="col-xs-6">Header</div>
+<div class="col-xs-6"><a href="../Project_ecommerce/index.php?action=login" class="navbar-link">Se connecter</a></div>
 <br>
 
 <body>
