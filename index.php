@@ -19,13 +19,13 @@ if ($_GET['action'] == "addProduct") {
     $product->addProduct();
 }
 
-if($_GET['action'] == "register") {
+if ($_GET['action'] == "register") {
     require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Controllers/user.php';
     $inscription = new Controller_User();
     $inscription->registerForm();
 }
 
-if($_GET['action'] == "login") {
+if ($_GET['action'] == "login") {
     require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Controllers/user.php';
     $inscription = new Controller_User();
     $inscription->userLogin();

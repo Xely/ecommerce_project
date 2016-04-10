@@ -2,7 +2,6 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Views/header.php';
 ?>
 
-
     <div class="container">
         <div class="row">
             <div class="col-md-offset-5 col-md-3">
@@ -35,8 +34,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Views/header.php
 
         </div>
     </div>
-    </div>
-
 
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Views/footer.php'

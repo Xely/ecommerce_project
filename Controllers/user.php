@@ -11,13 +11,29 @@ class Controller_User
 
         if (!empty($_POST)) {
             $this->checkLoginErrors($login_error_table);
-            var_dump($login_error_table);
 
             if (
                 empty($login_error_table['username']) &&
                 empty($login_error_table['password'])
             ) {
                 $this->checkLoginPassword($login_error_table);
+                if (
+                    empty($login_error_table['username']) &&
+                    empty($login_error_table['password']
+                    )
+                ) {
+                    // session_start();
+                    $Model_User = new Model_User();
+                    $user = $Model_User->getUser($this->checkExistingUsername($login_error_table));
+
+                    $_SESSION['id'] = $user[0]['id'];
+                    $_SESSION['username'] = $user[0]['username'];
+                    $_SESSION['name'] = $user[0]['name'];
+                    $_SESSION['firstname'] = $user[0]['firstname'];
+                    $_SESSION['email'] = $user[0]['email'];
+
+                    require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Views/User/login_complete.php';
+                }
             }
 
         }
@@ -42,11 +58,37 @@ class Controller_User
 
     }
 
+    public function checkMissingField(&$register_error_table)
+    {
+        foreach ($_POST as $input => $value) {
+            if (
+                strlen($value) == 0 &&
+                array_key_exists($input, $register_error_table)
+            ) {
+                $register_error_table[$input]["missing"] = 1;
+            }
+        }
+    }
+
+    public function checkExistingUsername(&$register_error_table)
+    {
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/php/Project_ecommerce/Models/user.php';
+        $Model_User = new Model_User();
+        $allUsers = $Model_User->getAllUsers();
+        foreach ($allUsers as $user) {
+            if ($user['username'] == $_POST['username']) {
+                // $register_error_table['username']['alreadyExists'] = 1;
+                return $user['id'];
+            }
+        }
+        return 0;
+
+    }
+
     public function checkLoginPassword(&$login_error_table)
     {
         $Model_User = new Model_User();
         $user = $Model_User->getUser($this->checkExistingUsername($login_error_table));
-        var_dump($user[0]['password']);
 
         if ($user[0]['password'] != SHA1($_POST['password'])) {
             $login_error_table['password']['notMatched'] = 1;
@@ -79,7 +121,6 @@ class Controller_User
         }
     }
 
-
     public function checkRegisterErrors(&$register_error_table)
     {
         $this->checkMissingField($register_error_table);
@@ -89,38 +130,11 @@ class Controller_User
         }
     }
 
-    public function checkMissingField(&$register_error_table)
-    {
-        foreach ($_POST as $input => $value) {
-            if (
-                strlen($value) == 0 &&
-                array_key_exists($input, $register_error_table)
-            ) {
-                $register_error_table[$input]["missing"] = 1;
-            }
-        }
-    }
-
     public function checkSamePassword(&$register_error_table)
     {
         if ($_POST['password'] != $_POST['conf_password']) {
             $register_error_table['password']['unmatch'] = 1;
         }
-    }
-
-    public function checkExistingUsername(&$register_error_table)
-    {
-        require_once $_SERVER['DOCUMENT_ROOT'] . '/php/Project_ecommerce/Models/user.php';
-        $Model_User = new Model_User();
-        $allUsers = $Model_User->getAllUsers();
-        foreach ($allUsers as $user) {
-            if ($user['username'] == $_POST['username']) {
-                // $register_error_table['username']['alreadyExists'] = 1;
-                return $user['id'];
-            }
-        }
-        return 0;
-
     }
 
     public function addUserRegister($error_table)
@@ -134,18 +148,18 @@ class Controller_User
         }
 
         if (!$flag) {
-        $name = htmlspecialchars($_POST['name']);
-        $firstname = htmlspecialchars($_POST['firstname']);
-        $username = htmlspecialchars($_POST['username']);
-        $password = SHA1(htmlspecialchars($_POST['password']));
-        $user = array(
-            "name" => $name,
-            "firstname" => $firstname,
-            "username" => $username,
-            "password" => $password
-        );
-        $this->addUser($user);
-    }
+            $name = htmlspecialchars($_POST['name']);
+            $firstname = htmlspecialchars($_POST['firstname']);
+            $username = htmlspecialchars($_POST['username']);
+            $password = SHA1(htmlspecialchars($_POST['password']));
+            $user = array(
+                "name" => $name,
+                "firstname" => $firstname,
+                "username" => $username,
+                "password" => $password
+            );
+            $this->addUser($user);
+        }
     }
 
     public function addUser($user)

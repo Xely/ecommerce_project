@@ -1,4 +1,4 @@
-y<?php
+<?php
 
 class Controller_Product
 {
@@ -10,14 +10,16 @@ class Controller_Product
         require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Views/Product/viewProduct.php';
     }
 
-    public function viewAllProducts($category) {
+    public function viewAllProducts($category)
+    {
         require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Models/product.php';
         $product = new Model_Product();
         $product_list = $product->getAllProducts($category);
         require $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Views/Product/viewAllProducts.php';
     }
 
-    public function addProduct() {
+    public function addProduct()
+    {
         if (!empty($_POST)) {
             // vérifie que tout est saisi correctement
 
