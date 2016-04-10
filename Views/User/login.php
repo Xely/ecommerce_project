@@ -1,6 +1,9 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Views/header.php';
-?>
+if (
+    (array_key_exists('registered', $_SESSION) && !$_SESSION['registered']) ||
+    !array_key_exists('registered', $_SESSION)
+) { ?>
 
     <div class="container">
         <div class="row">
@@ -8,9 +11,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Views/header.php
                 <div class="form-login">
                     <h4>J'ai deja un compte:</h4>
                     <form action="" method="post">
-                        <div class="form-group <?php if (!empty($login_error_table['username'])) {
-                            echo "has-error has-feedback";
-                        } ?>">
+                        <div class="form-group <?php if (!empty($login_error_table['username'])) { ?>
+                            has-error has-feedback
+                        <?php } ?>">
                             <label <?php if (!empty($login_error_table['username'])) {
                                 echo 'class="control-label"';
                             } ?> for="username">Nom d'utilisateur: </label>
@@ -31,10 +34,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Views/header.php
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
 
-<?php
+<?php } else { ?>
+
+    <div class="col-xs-4"><p>Vous êtes déjà connecté.</p></div>
+
+<?php }
 require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Views/footer.php'
 ?>

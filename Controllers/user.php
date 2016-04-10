@@ -2,6 +2,11 @@
 
 class Controller_User
 {
+    public function userLogout()
+    {
+        require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Views/User/logout.php';
+    }
+
     public function userLogin()
     {
         $login_error_table = array(
@@ -26,11 +31,14 @@ class Controller_User
                     $Model_User = new Model_User();
                     $user = $Model_User->getUser($this->checkExistingUsername($login_error_table));
 
-                    $_SESSION['id'] = $user[0]['id'];
-                    $_SESSION['username'] = $user[0]['username'];
-                    $_SESSION['name'] = $user[0]['name'];
-                    $_SESSION['firstname'] = $user[0]['firstname'];
-                    $_SESSION['email'] = $user[0]['email'];
+                    $_SESSION = array(
+                        'id' => $user[0]['id'],
+                        'username' => $user[0]['username'],
+                        'name' => $user[0]['name'],
+                        'firstname' => $user[0]['firstname'],
+                        'email' => $user[0]['email'],
+                        'registered' => true
+                    );
 
                     require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Views/User/login_complete.php';
                 }
@@ -116,7 +124,6 @@ class Controller_User
             !empty($register_error_table['password']) ||
             empty($_POST)
         ) {
-            var_dump($register_error_table);
             require_once $_SERVER['DOCUMENT_ROOT'] . '/php/Project_ecommerce/Views/User/register.php';
         }
     }

@@ -1,6 +1,11 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Views/header.php';
+if (array_key_exists('registered', $_SESSION) && $_SESSION['registered']) {
 ?>
+    </br>
+    <div class="col-xs-12 text-center register__logoutmessage">Veuillez vous déconnecter pour créer un compte.</div>
+<?php } else { ?>
+
 <div class="col-xs-12">
     <div class="col-lg-6">
         <form action="" method="post">
@@ -34,8 +39,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Views/header.php
     </div>
 </div>
 
-
-
 <?php
+}
 require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Views/footer.php'
 ?>

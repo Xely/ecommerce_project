@@ -1,9 +1,10 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Views/header.php';
+session_destroy();
 ?>
 
-    <div class="col-xs-6 login-welcome"></br><p>Bienvenue, <?php echo $_SESSION['firstname']; ?></p>
-    </div>
+    Vous êtes désormais déconnecté.
+    A bientôt!
 
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Views/footer.php'

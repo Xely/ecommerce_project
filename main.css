@@ -1,5 +1,5 @@
 body {
-    font-family: Arial;
+    font-family: Verdana;
     font-size: 18px;
     margin: 0 auto;
     margin-top: 20px;
@@ -48,4 +48,13 @@ h4 {
 
 .wrapper {
     text-align: center;
+}
+
+.login-welcome {
+
+    font-size: 20px;
+}
+
+.register__logoutmessage {
+    font-size: 25px;
 }

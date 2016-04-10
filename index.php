@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 if ($_GET['action'] == "viewProduct" && !empty($_GET['id'])) {
     $id = intval($_GET['id']);
     require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Controllers/product.php';
@@ -29,4 +29,10 @@ if ($_GET['action'] == "login") {
     require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Controllers/user.php';
     $inscription = new Controller_User();
     $inscription->userLogin();
+}
+
+if ($_GET['action'] == "logout") {
+    require_once $_SERVER['DOCUMENT_ROOT'] . 'php/Project_ecommerce/Controllers/user.php';
+    $inscription = new Controller_User();
+    $inscription->userLogout();
 }
