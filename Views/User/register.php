@@ -6,8 +6,8 @@ if (array_key_exists('registered', $_SESSION) && $_SESSION['registered']) {
     <div class="col-xs-12 text-center register__logoutmessage">Veuillez vous déconnecter pour créer un compte.</div>
 <?php } else { ?>
 
-<div class="col-xs-12">
-    <div class="col-lg-6">
+<div class="col-xs-12 register__form">
+    <div class="col-lg-6 col-lg-offset-3">
         <form action="" method="post">
             <div class="form-group <?php if (!empty($register_error_table['name'])) { echo "has-error has-feedback";} ?>">
                 <label <?php if (!empty($register_error_table['name'])) { echo 'class="control-label"';} ?> for="name">Nom: </label>
